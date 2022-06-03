@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using api.Data;
 using api.DTOs;
 using api.Entities;
+using api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,10 +15,13 @@ namespace api.Controllers
 {
     public class AccountController : BaseApiController
     {
-        DataContext _context;
-        public AccountController(DataContext context)
+        private readonly DataContext _context;
+
+        private readonly ITokenService _tokenService;
+        public AccountController(DataContext context, ITokenService tokenService)
         {
             _context = context;
+            _tokenService = tokenService;
         }
 
         [HttpPost("register")]
@@ -70,7 +74,7 @@ namespace api.Controllers
         [HttpDelete("fastdelete/{id}")]
         public async Task<ActionResult<bool>> FastDelete(int id){
             var user = new AppUser{Id = id};
-            _context.Attach(user);
+            //_context.Attach(user);
            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
             return true;
