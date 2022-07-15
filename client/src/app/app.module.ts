@@ -12,13 +12,15 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component'
 import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from './_modules/shared.module';
+import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    TestErrorsComponent
   ],
   imports: [
     BrowserModule,
